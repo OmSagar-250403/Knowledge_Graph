@@ -11,12 +11,15 @@ class CsvWriterPipeline:
     def __init__(self):
         self.file = open('products.csv', 'w', newline='', encoding='utf-8')
         self.csv_writer = csv.DictWriter(self.file, fieldnames=[
-            'title', 'price', 'image_url', 'product_url', 'product_type', 'tags'
+            'index', 'title', 'price', 'image_url', 'product_url', 'product_type', 'tags'
         ])
         self.csv_writer.writeheader()
+        self.index = 1
 
     def process_item(self, item, spider):
+        item['index'] = self.index
         self.csv_writer.writerow(item)
+        self.index += 1
         return item
 
     def close_spider(self, spider):

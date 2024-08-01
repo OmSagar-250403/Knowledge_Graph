@@ -33,8 +33,9 @@ class ShopifySpider(scrapy.Spider):
                 tags = ", ".join(product['tags']) if 'tags' in product else 'N/A'
 
                 # Iterate over each variant
-                for variant in product.get('variants', []):
+                for variant_index, variant in enumerate(product.get('variants', [])):
                     yield {
+                        'index': index * len(product.get('variants', [])) + variant_index + 1,
                         'title': title,
                         'price': variant.get('price', 'N/A'),
                         'image_url': product['images'][0]['src'] if product.get('images') else 'N/A',
