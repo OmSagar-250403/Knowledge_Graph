@@ -6,6 +6,9 @@ class ShopifySpider(scrapy.Spider):
     name = "spider"
     start_urls = [
         "https://gymshark.com/products.json",
+        "https://wrogn.com/products.json",
+        "https://www.swimoutlet.com/products.json",
+        "https://shopthemint.com/products.json",
     ]
     products_limit = 500  # Limit to fetch only 500 products
 
@@ -25,20 +28,20 @@ class ShopifySpider(scrapy.Spider):
                     break
 
                 title = product.get('title', 'N/A')
-                price = product['variants'][0]['price'] if product.get('variants') else 'N/A'
-                image_url = product['images'][0]['src'] if product.get('images') else 'N/A'
                 product_url = f"{response.url.split('/products.json')[0]}/products/{product['handle']}"
                 product_type = product.get('product_type', 'N/A')
                 tags = ", ".join(product['tags']) if 'tags' in product else 'N/A'
 
-                yield {
-                    'title': title,
-                    'price': price,
-                    'image_url': image_url,
-                    'product_url': product_url,
-                    'product_type': product_type,
-                    'tags': tags
-                }
+                # Iterate over each variant
+                for variant in product.get('variants', []):
+                    yield {
+                        'title': title,
+                        'price': variant.get('price', 'N/A'),
+                        'image_url': product['images'][0]['src'] if product.get('images') else 'N/A',
+                        'product_url': product_url,
+                        'product_type': product_type,
+                        'tags': tags
+                    }
 
                 # Stop further processing once the limit is reached
                 if index + 1 >= self.products_limit:

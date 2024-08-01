@@ -11,19 +11,13 @@ class CsvWriterPipeline:
     def __init__(self):
         self.file = open('products.csv', 'w', newline='', encoding='utf-8')
         self.csv_writer = csv.DictWriter(self.file, fieldnames=[
-            'index', 'title', 'price', 'image_url', 'product_url', 'product_type', 'tags'
+            'title', 'price', 'image_url', 'product_url', 'product_type', 'tags'
         ])
         self.csv_writer.writeheader()
-        self.index = 0  # Initialize index counter
 
     def process_item(self, item, spider):
-        # Add index to item and write to CSV
-        item_with_index = dict(item)  # Create a copy of the item
-        item_with_index['index'] = self.index
-        self.csv_writer.writerow(item_with_index)
-        self.index += 1  # Increment index counter
+        self.csv_writer.writerow(item)
         return item
 
     def close_spider(self, spider):
         self.file.close()
-
