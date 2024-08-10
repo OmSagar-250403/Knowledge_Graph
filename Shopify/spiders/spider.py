@@ -4,12 +4,7 @@ import json
 
 class ShopifySpider(scrapy.Spider):
     name = "spider"
-    start_urls = [
-        "https://gymshark.com/products.json",
-        "https://wrogn.com/products.json",
-        "https://www.swimoutlet.com/products.json",
-        "https://shopthemint.com/products.json",
-    ]
+    start_urls = ["https://wrogn.com/products.json"]
     products_limit = 500  # Limit to fetch only 500 products
 
     custom_settings = {
