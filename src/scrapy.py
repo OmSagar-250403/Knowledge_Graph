@@ -67,7 +67,7 @@ def scrape_single_page(page_title):
     })
 
 # Load actor data
-actor_file_path = os.path.join('assets', 'Best Actors - Top 250.csv')
+actor_file_path = os.path.join('assets', 'Best Actors - Top 2501.csv')
 actors_df = pd.read_csv(actor_file_path, engine='python', encoding='windows-1252')
 
 # Prepare the output directory
@@ -83,7 +83,7 @@ for actor in actors_df['Name']:
         actor_data.to_json(output_path)
 
 # Load movie data
-movie_file_path = os.path.join('assets', 'Top 5000.csv')
+movie_file_path = os.path.join('assets', 'Top 50001.csv')
 movies_df = pd.read_csv(movie_file_path, engine='python')
 
 # Scrape data for each movie and save as JSON
