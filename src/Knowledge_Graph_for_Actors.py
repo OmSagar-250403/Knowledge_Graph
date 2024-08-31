@@ -1,90 +1,37 @@
-import re
+# Import necessary libraries
+#import re
+import os
 import pandas as pd
-import bs4
-import requests
+#import requests
 import spacy
-from spacy import displacy
+import nltk
+#from bs4 import BeautifulSoup as bs4
+from spacy.matcher import Matcher
+#from spacy.tokens import Span
+import networkx as nx
+import matplotlib.pyplot as plt
+#from tqdm import tqdm
+
+# Load the large English NLP model
 nlp = spacy.load('en_core_web_lg')
 
-from spacy.matcher import Matcher 
-from spacy.tokens import Span 
-
-import networkx as nx
-
-import matplotlib.pyplot as plt
-from tqdm import tqdm
-
+# Set pandas display option for better visibility
 pd.set_option('display.max_colwidth', 200)
-
-
-
-def get_entities(sent):
-
-  ent1 = ""
-  ent2 = ""
-
-  prv_tok_dep = ""    
-  prv_tok_text = ""   
-
-  prefix = ""
-  modifier = ""
-
-  
-  
-  for tok in nlp(sent):
-    
-    if tok.dep_ != "punct":
-      
-      if tok.dep_ == "compound":
-        prefix = tok.text
-        
-        if prv_tok_dep == "compound":
-          prefix = prv_tok_text + " "+ tok.text
-     
-      if tok.dep_.endswith("mod") == True:
-        modifier = tok.text
-       
-        if prv_tok_dep == "compound":
-          modifier = prv_tok_text + " "+ tok.text
-      
-      if tok.dep_.find("subj") == True:
-        ent1 = modifier +" "+ prefix + " "+ tok.text
-        prefix = ""
-        modifier = ""
-        prv_tok_dep = ""
-        prv_tok_text = ""      
-
-     
-      if tok.dep_.find("obj") == True:
-        ent2 = modifier +" "+ prefix +" "+ tok.text
-        
-      
-      prv_tok_dep = tok.dep_
-      prv_tok_text = tok.text
-
-
-  return [ent1.strip(), ent2.strip()]
-    
-
-
-import pandas as pd
-import spacy
-import os 
-import nltk
-
 
 sentences=[]
 files=os.listdir('../actors and movies')
 for file in files:
     df=pd.read_json('../actors and movies/'+str(file))
     sentences.append(nltk.tokenize.sent_tokenize(df['text'][0]))
+    print(sentences)
     
 
 sentences=sum(sentences,[])
-print(sentences)
+#print(sentences)
 
 
 def get_entities(sent):
+  print("get_entities_2")
   ## chunk 1
   ent1 = ""
   ent2 = ""
@@ -143,7 +90,7 @@ for i in sentences:
 
 
 def get_relation(sent):
-
+  print("get_relation")
   doc = nlp(sent)
 
   # Matcher class object 
