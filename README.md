@@ -74,7 +74,7 @@ The sentences were tokenized and the Entity-Relation-Entity were identified and 
 The knowledge graph was visualized using Networkx   
 
 <b><u>Output</u></b>:Below is the knowledge graph representing top 250 actors along with their extracted entities (subject-object pairs) and the predicates (relation between entities).      
-![](![alt text](image.png))   
+![](src/img/KG.png)   
 The networkx library was used to create a network from this data frame. The nodes will represent the entities and the edges or connections between the nodes will represent the relations between the nodes.   
 It is going to be a directed graph. In other words, the relation between any connected node pair is not two-way, it is only from one node to another. For example, “John eats pasta”
 ![](![alt text](image-2.png))
