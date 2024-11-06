@@ -3,14 +3,6 @@
 An IR project based on Knowledge Graph Structures for movies and actors/actresses analysis. 
 
 
-
-# Group Members
-
-1. Abhinav Talari (S20180010003)
-2. Utkarsh Ajay Aditya (S20180010182)
-
-
-
 # Project Details
 
 <b><u>Project Title</u></b>: The Entertainment Knowledge Graph 
@@ -21,17 +13,35 @@ An IR project based on Knowledge Graph Structures for movies and actors/actresse
 
 ## Project Description
 
-This project focuses on end-to-end utilization of knowledge graphs and semantics in the field of entertainment. Our entities include movies, tv shows, actors/actresses and all their attributes and relationships. Our project is based on entity ranking, entity linking, entity-based retrieval models, entity recommendation, document filtering and knowledge graph population. The knowledge graph will represent movies and tv shows as well as actors, genres and the complex interrelationships among them, which will help us retrieve more informational value compared to free text.
+This project is dedicated to the comprehensive use of knowledge graphs and semantic analysis within the entertainment domain. The primary entities include movies, TV shows, actors, and actresses, along with their associated attributes and interconnections. Our approach incorporates techniques such as entity ranking, linking, entity-based retrieval models, personalized recommendations, document filtering, and knowledge graph expansion. The knowledge graph will represent movies, TV shows, actors, genres, and the intricate relationships between them. This structured representation enhances the retrieval of valuable insights beyond what is possible with unstructured text alone.
 
 
 
 # Algorithms/Approaches Used
 
-Individual Breakdown for each member of the team.
+1. ### Entity Recognition and Linking
+Utilized Named Entity Recognition (NER) to identify key entities such as movie titles, actors, genres, and other relevant attributes.
+Applied entity linking techniques to match these entities with those in our knowledge graph, ensuring consistency and accuracy in entity representation.
+2. ### Knowledge Graph Construction
+Built a graph database to represent entities and their relationships using libraries like NetworkX.
+Defined nodes for each entity type (e.g., movie, actor, genre) and edges to capture their interrelationships, allowing for structured representation and easy traversal.
+3. ### Entity-Based Retrieval Models
+Implemented retrieval models that use entities as the core components to enhance search accuracy.
+Focused on entity-ranking techniques to prioritize relevant entities, improving the precision of query responses.
+4. ### Entity Recommendation
+Developed an entity recommendation engine that suggests related movies, actors, or genres based on user preferences and existing connections in the knowledge graph.
+Used collaborative filtering and content-based filtering approaches for personalized recommendations.
+5. ### Document Filtering
+Applied document filtering techniques to remove irrelevant or redundant information from the dataset.
+Focused on identifying and retaining documents rich in entities and their attributes, which contribute to the knowledge graph.
+6. ### Knowledge Graph Population and Expansion
+Periodically updated and expanded the knowledge graph to incorporate new data on movies, TV shows, and actors.
+Ensured that the graph evolves with emerging trends in entertainment, enhancing its informational value over time.
+7. ### Semantic Search and Entity Ranking
+Used semantic search to understand context and retrieve the most relevant entities and information based on user queries.
+Implemented entity ranking algorithms to prioritize key entities, refining the retrieval process and enhancing user experience.
 
 
-
-## 1. Abhinav Talari(S20180010003) Tasks
 
 ### A. Web Scraping(Actors/Actresses data)
 
@@ -53,7 +63,9 @@ the query for this function needs to be very precise
 
 <b><u>For Example</u></b> wiki_page("The Avengers") will not fetch the movie synopsis of the MCU's Avengers but just links and names of other movies/entities with the same name or context.
 
+
 ### B. Knowledge Graph for Actors
+
 <b><u>Associated Files</u></b>: Knowledge_Graph_for_Actors.py      
 
 Based on the data crawled and collected for Actors and Movies , I created a knowledge graph to perform "Entity-Entity pair based on Relation" Query.   
@@ -68,7 +80,9 @@ It is going to be a directed graph. In other words, the relation between any con
 ![](img/KGA2.png)
 The above figure represents a sub-knowledge graph based on the relation "starred in" for actors. 
 
+
 ### C. Ranked Retrieval model(Actors)
+
 <b><u>Associated Files</u></b>: RankedRetrieval_actors.py   
 Based on the Data Scraped I created a Ranked Retrieval System using tf-idf ranking.  
 Since the Boolean Model only fetches complete matches, it doesn’t address the problem of the documents being partially matched. The Vector Space Model solves this problem by introducing vectors of index items each assigned with weights. The weights are ranged from positive (if matched completely or to some extent) to negative (if unmatched or completely oppositely matched) if documents are present. Term Frequency - Inverse Document Frequency (tf-idf) is one of the most popular techniques where weights are terms (e.g. words, keywords, phrases etc.) and dimensions is number of words inside corpus. 
@@ -82,19 +96,16 @@ Therefore I created a ranked retrieval based on tf-idf ranking
 
 
 
-## 2.Utkarsh Ajay Aditya(S20180010182) Tasks
-
-### A. Web Scraping(Movies)
-<b><u>Associated Files</u></b>: imdb_moviedata_scrape.py   
-The above code is used for scraping movie details of over 83,000 movies and storing it in final_dataset.csv
-The collected fields for a given movie were:  
+### D. Movies dataset
+ 
+Instead of scraping, the dataset of over 83,000 IMDb movies was directly downloaded and stored in final_dataset.csv. 
 Title, Date, Run Time, Genre, Rating Score, Description, Director, Stars, VotesGross   
     
 ![](img/out3.PNG)
 
 
 
-### B. Knowledge Graph for Movies
+### E. Knowledge Graph for Movies
 
 <b><u>Associated Files</u></b>: KnowledgeGraph_movies_recommender_system.py 
 
@@ -155,28 +166,6 @@ director, writer, year, other user reviews, etc.
 
  ![](img/utk5.PNG)
 
- 
-
-### D. Spell Correction for the entertainment domain
-
-<b><u>Associated Files</u></b>: KnowledgeGraph_movies_recommender_system.py
-
-Entertainment_domain_spell_correction.py is an autocorrect program file to correct incorrect 
-		a) movie name or TV series name
-		b) actors/actresses name
-		c) director/write name
-
-**Example** For query "Robept Downez" and another query "emmg watsoz"
-
-![](img/utklast.PNG)
-
-**Implementation of spell checker**
-
-1) Store Dictionary in Trie
-2) Query is processed word by word.
-3) If word is in dictionary, move ahead.
-4) If word is not in dictionary, display the candidate set.
-5) Also display the post probable candidate by calculating the posterior probability 
 
 
 
