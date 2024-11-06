@@ -10,13 +10,14 @@ document_index = {}
 for i in range(len(files)):
     document_index[str(i+1)] = files[i].replace(".json", "")
 
-print(document_index)
+#print(document_index)
 count = 1
 Documents_dict = {}
 vocab_dict = defaultdict(int)   
 for fil in files:     
     f = pd.read_json('../actors and movies/' + str(fil))
     text = f['text'][0]
+    #print(text)
     text = text.replace('\n', ' ')
     final_text = ""
     for char in text:
@@ -98,4 +99,4 @@ else:
     for a in sorted(Similarity_scores.items(), reverse=True, key = lambda x : x[1]):
         if a[1] != 0:
             print(document_index[a[0].replace("doc","")] + ".json is the Document" + "Ranked at " + str(i) + " With " + " Similarity Score :" + str(a[1]))
-        i = i + 1
+        i = i + 1  

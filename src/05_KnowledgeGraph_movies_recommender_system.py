@@ -18,7 +18,7 @@ class KnowledgeGraph():
         color_map = []
         movies_genres = {}
 
-        with open('final_dataset_imdb.csv',encoding="utf8") as csv_file:
+        with open('assets/final_dataset_imdb.csv',encoding="utf8") as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             line_count = 0
             for row in csv_reader:
@@ -52,11 +52,11 @@ class KnowledgeGraph():
                 avg_color = f'#{avg:06x}'
                 color_map.append(avg_color)
 
-        plt.figure(figsize=(150,150))
-        pos = nx.spring_layout(G,k=0.10,iterations=20)
-        nx.draw(G, with_labels=True, node_color=color_map, edge_color=edge_colors, node_size = 4500, prog="dot", edge_cmap=plt.cm.Blues, font_size=16, pos=pos)
+        plt.figure(figsize=(15, 15))  # Adjust the figure size to something more reasonable
+        pos = nx.spring_layout(G, k=0.10, iterations=20)
+        nx.draw(G, with_labels=True, node_color=color_map, edge_color=edge_colors, node_size=4500, font_size=16, pos=pos)
         plt.savefig("my_graph.pdf")
-        print("\nPlease Check my_graph.pdf in the current code directory\n")
+        print("\nPlease check my_graph.pdf in the current code directory\n")
     
     def movie_details(self, title):
         """
@@ -66,112 +66,131 @@ class KnowledgeGraph():
         color_map = []
         node_sizes = []
         colors = ['#5013ED', '#42853C', '#D4E907', '#2A257D', '#EF093B', '#8CA030', '#35B1DA', '#3F4F33', '#CAA341', '#B69BAE', '#E77FE2', '#9483F4', '#77DF5D', '#F3902F', '#E88182', '#713338', '#5CEFAB', '#863771', '#53EF26', '#FF80FF', '#6FF6FF']
-        with open('final_dataset_imdb.csv',encoding="utf8") as csv_file:
+        with open('assets/final_dataset_imdb.csv',encoding="utf8") as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             for row in csv_reader:
-                if row[2]==title:
-                    row[1]=row[2]
-                    a = row[1]
-                    G.add_node(row[1])
-                    color_map.append('red')
-                    node_sizes.append(20000)
-                    G.add_node(row[4])
-                    color_map.append(colors[1])
-                    node_sizes.append(7000)
-                    G.add_edge(row[1],row[4], movie='Released on')
-                    G.add_node("Genres")
-                    color_map.append(colors[2])
-                    node_sizes.append(7000)
-                    G.add_edge(row[1],"Genres", movie='Genres include')
-                    for i in list(row[5].split(", ")):
-                        G.add_node(i)
-                        color_map.append(colors[4])
+                if row and len(row) > 14:
+                    if row[2].strip().lower()==title.strip().lower():
+                        row[1]=row[2]
+                        a = row[1]
+                        print("A : ", a)
+                        G.add_node(row[1])
+                        color_map.append('red')
+                        node_sizes.append(20000)
+                        G.add_node(row[4])
+                        color_map.append(colors[1])
                         node_sizes.append(7000)
-                        G.add_edge("Genres", i)
-                    G.add_node(row[6])
-                    color_map.append(colors[5])
-                    node_sizes.append(7000)
-                    G.add_edge(row[1],row[6], movie='Duration(Mins)')
-                    G.add_node(row[7])
-                    color_map.append(colors[6])
-                    node_sizes.append(7000)
-                    G.add_edge(row[1],row[7], movie='Country released in')
-                    G.add_node("Languages")
-                    color_map.append(colors[7])
-                    node_sizes.append(7000)
-                    G.add_edge(row[1],"Languages", movie='languages released in')
-                    count=0
-                    for i in list(row[8].split(", ")):
-                        G.add_node(i)
-                        color_map.append(colors[18])
-                        node_sizes.append(5000)
-                        G.add_edge("Languages", i)
-                        if count>4:
-                            break
-                        count+=1
-                    G.add_node(row[9])
-                    color_map.append(colors[8])
-                    node_sizes.append(7000)
-                    G.add_edge(row[1],row[9], movie='Directed by')
-                    G.add_node("Cast")
-                    color_map.append(colors[9])
-                    node_sizes.append(7000)
-                    G.add_edge(row[1],"Cast", movie='cast includes')
-                    count=0
-                    for i in list(row[12].split(", ")):
-                        G.add_node(i)
-                        color_map.append(colors[10])
-                        node_sizes.append(5000)
-                        G.add_edge("Cast", i)
-                        if count>4:
-                            break
-                        count+=1
-                    description = row[13]
-                    G.add_node(row[14])
-                    color_map.append(colors[11])
-                    node_sizes.append(7000)
-                    G.add_edge(row[1],row[14], movie='Rating')
-                    break
-                    
+                        G.add_edge(row[1],row[4], movie='Released on')
+                        G.add_node("Genres")
+                        color_map.append(colors[2])
+                        node_sizes.append(7000)
+                        G.add_edge(row[1],"Genres", movie='Genres include')
+                        for i in list(row[5].split(", ")):
+                            G.add_node(i)
+                            color_map.append(colors[4])
+                            node_sizes.append(7000)
+                            G.add_edge("Genres", i)
+                        G.add_node(row[6])
+                        color_map.append(colors[5])
+                        node_sizes.append(7000)
+                        G.add_edge(row[1],row[6], movie='Duration(Mins)')
+                        G.add_node(row[7])
+                        color_map.append(colors[6])
+                        node_sizes.append(7000)
+                        G.add_edge(row[1],row[7], movie='Country released in')
+                        G.add_node("Languages")
+                        color_map.append(colors[7])
+                        node_sizes.append(7000)
+                        G.add_edge(row[1],"Languages", movie='languages released in')
+                        count=0
+                        for i in list(row[8].split(", ")):
+                            G.add_node(i)
+                            color_map.append(colors[18])
+                            node_sizes.append(5000)
+                            G.add_edge("Languages", i)
+                            if count>4:
+                                break
+                            count+=1
+                        G.add_node(row[9])
+                        color_map.append(colors[8])
+                        node_sizes.append(7000)
+                        G.add_edge(row[1],row[9], movie='Directed by')
+                        G.add_node("Cast")
+                        color_map.append(colors[9])
+                        node_sizes.append(7000)
+                        G.add_edge(row[1],"Cast", movie='cast includes')
+                        count=0
+                        for i in list(row[12].split(", ")):
+                            G.add_node(i)
+                            color_map.append(colors[10])
+                            node_sizes.append(5000)
+                            G.add_edge("Cast", i)
+                            if count>4:
+                                break
+                            count+=1
+                        description = row[13]
+                        G.add_node(row[14])
+                        color_map.append(colors[11])
+                        node_sizes.append(7000)
+                        G.add_edge(row[1],row[14], movie='Rating')
+                        break
+
+        print("Nodes:", G.nodes())
+        print("Edges:", G.edges())
         plt.figure(figsize=(25,25))
-        pos = nx.shell_layout(G)
-        pos[a] = np.array([0, 0])
-        nx.draw(G, with_labels=True, node_color=color_map, node_size = node_sizes, prog="dot", edge_cmap=plt.cm.Blues, font_size=20, pos=pos)
+
+        try:
+            pos = nx.nx_pydot.pydot_layout(G, prog="dot")
+        except Exception as e:
+            print(f"pydot_layout failed: {e}")
+            print("Falling back to spring_layout")
+            pos = nx.spring_layout(G)
+
+        nx.draw(G, with_labels=True, node_color=color_map, node_size=node_sizes, pos=pos)
+        
         edge_labels = nx.get_edge_attributes(G, 'movie')
-        nx.draw_networkx_edge_labels(G, pos, labels=edge_labels, font_size=20)
+        nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=20)
+
         plt.savefig("movie_detail.pdf")
-        print("Description of movie: ", description)
         print("\nPlease Check movie_detail.pdf in the current code directory\n")
 
+    
     def movie_similarity(self, movie1, movie2):
         """
-        Method to plot detailed KG of comparision of 2 movies.
+        Method to plot detailed KG of comparison of 2 movies.
         """
         G = nx.MultiDiGraph()
         color_map = []
         node_sizes = []
-        with open('final_dataset_imdb.csv',encoding="utf8") as csv_file:
+        
+        # Fetch movie1 details
+        with open('assets/final_dataset_imdb.csv', encoding="utf8") as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             for row in csv_reader:
-                if row[2]==movie1:
-                    row[1]=row[2]
-                    a=row[1]
+                if row[2] == movie1:
+                    row[1] = row[2]
+                    a = row[1]
                     movie1row = row
                     break
-        with open('final_dataset_imdb.csv',encoding="utf8") as csv_file:
+
+        # Fetch movie2 details
+        with open('assets/final_dataset_imdb.csv', encoding="utf8") as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             for row in csv_reader:
-                
-                if row[2]==movie2:
-                    row[1]=row[2]
-                    b=row[1]
+                if row[2] == movie2:
+                    row[1] = row[2]
+                    b = row[1]
+                    
+                    # Add nodes for each movie title with color red
                     G.add_node(row[1])
                     color_map.append('red')
                     node_sizes.append(20000)
+                    
                     G.add_node(movie1row[1])
                     color_map.append('red')
                     node_sizes.append(20000)
                     
+                    # Add genre nodes (yellow) and connect to each movie
                     genres = list(row[5].split(", "))
                     for x in genres:
                         if x not in G:
@@ -179,6 +198,7 @@ class KnowledgeGraph():
                             color_map.append('yellow')
                             node_sizes.append(7000)
                         G.add_edge(row[1], x)
+                    
                     genres = list(movie1row[5].split(", "))
                     for x in genres:
                         if x not in G:
@@ -187,59 +207,95 @@ class KnowledgeGraph():
                             node_sizes.append(7000)
                         G.add_edge(movie1row[1], x)
                     
-                    count=0
+                    # Add language nodes (light blue) and connect to each movie, limiting to 5 languages
+                    count = 0
                     for i in list(row[8].split(", ")):
                         if i not in G:
                             G.add_node(i)
-                            color_map.append('blue')
+                            color_map.append('#ADD8E6')
                             node_sizes.append(7000)
                         G.add_edge(row[1], i)
-                        if count>4:
+                        if count > 4:
                             break
-                        count+=1
-                    count=0
+                        count += 1
+                    
+                    count = 0
                     for i in list(movie1row[8].split(", ")):
                         if i not in G:
                             G.add_node(i)
-                            color_map.append('blue')
+                            color_map.append('#ADD8E6')
                             node_sizes.append(7000)
                         G.add_edge(movie1row[1], i)
-                        if count>4:
+                        if count > 4:
                             break
-                        count+=1
+                        count += 1
                     
+                    # Add director nodes (light green) and connect to each movie
                     G.add_node(row[9])
-                    color_map.append('green')
+                    color_map.append('#90EE90')
                     node_sizes.append(7000)
                     G.add_edge(row[1], row[9])
+                    
                     if movie1row[9] not in G:
                         G.add_node(movie1row[9])
-                        color_map.append('green')
+                        color_map.append('#90EE90')
                         node_sizes.append(7000)
                     G.add_edge(movie1row[1], movie1row[9])
                     
-                    break
+                    # Add production company nodes (light pink) and connect to each movie
+                    G.add_node(row[11])  # Production company for movie2
+                    color_map.append('#FFB6C1')  # Light Pink
+                    node_sizes.append(7000)
+                    G.add_edge(row[1], row[11])  # Edge from movie2 to its production company
                     
-            plt.figure(figsize=(35,35))
-            pos = nx.planar_layout(G)
-            pos[a] = np.array([1, 0]) 
-            pos[b] = np.array([-1, 0]) 
-            nx.draw(G, with_labels=True, node_color=color_map, node_size = node_sizes, prog="dot", edge_cmap=plt.cm.Blues, font_size=16, pos=pos)
-            plt.savefig("movie_similarity.pdf")
-            print("\nPlease Check movie_similarity.pdf in the current code directory\n")
-            
+                    if movie1row[11] not in G:
+                        G.add_node(movie1row[11])  # Production company for movie1
+                        color_map.append('#FFB6C1')  # Light Pink
+                        node_sizes.append(7000)
+                    G.add_edge(movie1row[1], movie1row[11])  # Edge from movie1 to its production company
+
+                    # Add actor nodes (lavender) and connect to each movie
+                    actors = list(row[12].split(", "))  # Actors for movie2
+                    for actor in actors:
+                        if actor not in G:
+                            G.add_node(actor)
+                            color_map.append('#E6E6FA')  # Lavender
+                            node_sizes.append(7000)
+                        G.add_edge(row[1], actor)
+                    
+                    actors = list(movie1row[12].split(", "))  # Actors for movie1
+                    for actor in actors:
+                        if actor not in G:
+                            G.add_node(actor)
+                            color_map.append('#E6E6FA')  # Lavender
+                            node_sizes.append(7000)
+                        G.add_edge(movie1row[1], actor)
+
+                    break
+
+        # Plotting the graph
+        plt.figure(figsize=(35, 35))
+        pos = nx.planar_layout(G)
+        pos[a] = np.array([1, 0])
+        pos[b] = np.array([-1, 0])
+        nx.draw(G, with_labels=True, node_color=color_map, node_size=node_sizes, edge_cmap=plt.cm.Blues, font_size=16, pos=pos)
+        
+        plt.savefig("movie_similarity.pdf")
+        print("\nPlease Check movie_similarity.pdf in the current code directory\n")
+
+        
     def movie_recommend(self, movie1):
         """
         Method to return list of best matching movies based on a ranking system.
         """
-        with open('final_dataset_imdb.csv',encoding="utf8") as csv_file:
+        with open('assets/final_dataset_imdb.csv',encoding="utf8") as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             for row in csv_reader:
                 if row[2]==movie1:
                     movie1row = row
                     break
                     
-        with open('IMDB_movies.csv',encoding="utf8") as csv_file:
+        with open('assets/final_dataset_imdb.csv',encoding="utf8") as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             best_score = 0
             best_movies = []
@@ -333,7 +389,8 @@ if __name__ == "__main__":
             KG.similar_movies(language=language, year=year)
         elif option == 4:
             movie_name = input("Enter Movie Name(Case Sensitive): ")
-            try:
-                KG.movie_recommend(movie_name)
-            except:
-                print("Movie not found in database. Check movie name again along with case.")
+            KG.movie_recommend(movie_name)
+            # try:
+            #     KG.movie_recommend(movie_name)
+            # except:
+            #     print("Movie not found in database. Check movie name again along with case.")
