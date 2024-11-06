@@ -22,21 +22,27 @@ This project is dedicated to the comprehensive use of knowledge graphs and seman
 1. ### Entity Recognition and Linking
 Utilized Named Entity Recognition (NER) to identify key entities such as movie titles, actors, genres, and other relevant attributes.
 Applied entity linking techniques to match these entities with those in our knowledge graph, ensuring consistency and accuracy in entity representation.
+
 2. ### Knowledge Graph Construction
 Built a graph database to represent entities and their relationships using libraries like NetworkX.
 Defined nodes for each entity type (e.g., movie, actor, genre) and edges to capture their interrelationships, allowing for structured representation and easy traversal.
+
 3. ### Entity-Based Retrieval Models
 Implemented retrieval models that use entities as the core components to enhance search accuracy.
 Focused on entity-ranking techniques to prioritize relevant entities, improving the precision of query responses.
+
 4. ### Entity Recommendation
 Developed an entity recommendation engine that suggests related movies, actors, or genres based on user preferences and existing connections in the knowledge graph.
 Used collaborative filtering and content-based filtering approaches for personalized recommendations.
+
 5. ### Document Filtering
 Applied document filtering techniques to remove irrelevant or redundant information from the dataset.
 Focused on identifying and retaining documents rich in entities and their attributes, which contribute to the knowledge graph.
+
 6. ### Knowledge Graph Population and Expansion
 Periodically updated and expanded the knowledge graph to incorporate new data on movies, TV shows, and actors.
 Ensured that the graph evolves with emerging trends in entertainment, enhancing its informational value over time.
+
 7. ### Semantic Search and Entity Ranking
 Used semantic search to understand context and retrieve the most relevant entities and information based on user queries.
 Implemented entity ranking algorithms to prioritize key entities, refining the retrieval process and enhancing user experience.
@@ -91,8 +97,8 @@ Therefore I created a ranked retrieval based on tf-idf ranking
 <b><u>Output</u></b>
 
 1. Below is the output showing for the query "The Avengers"
-![](src/img/Screenshot (10).png)
-![](src/img/Screenshot (11).png)
+![](![alt text](<src/img/Screenshot (10).png>)) 
+![](![alt text](<src/img/Screenshot (11).png>))
 
 
 
