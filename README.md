@@ -77,7 +77,7 @@ The knowledge graph was visualized using Networkx
 ![](src/img/KG.png)   
 The networkx library was used to create a network from this data frame. The nodes will represent the entities and the edges or connections between the nodes will represent the relations between the nodes.   
 It is going to be a directed graph. In other words, the relation between any connected node pair is not two-way, it is only from one node to another. For example, “John eats pasta”
-![](![alt text](image-2.png))
+![](src/img/RKG.png)
 The above figure represents a sub-knowledge graph based on the relation "starred in" for actors. 
 
 
@@ -91,8 +91,8 @@ Therefore I created a ranked retrieval based on tf-idf ranking
 <b><u>Output</u></b>
 
 1. Below is the output showing for the query "The Avengers"
-![](c:\Users\omsag\OneDrive\Pictures\Screenshots 1\Screenshot (10).png)
-![](c:\Users\omsag\OneDrive\Pictures\Screenshots 1\Screenshot (11).png)
+![](src/img/Screenshot (10).png)
+![](src/img/Screenshot (11).png)
 
 
 
@@ -114,7 +114,7 @@ The above code file defines 3 different types of knowledge graph structures rela
 
 #### 1. Movie detail graph for a single movie  
 
-![](movie_detail_page-0001.jpg) 
+![](src/img/movie_detail_page-0001.jpg) 
 
 The above figure shows the detailed view of a given movie name showing all its details like director, cast, release date, etc.
 
@@ -123,13 +123,13 @@ The above figure shows the detailed view of a given movie name showing all its d
 1st movie : Captain america: Civil war
 2nd movie : Iron Man
 
-![](![alt text](image-1.png))
+![](src/img/movie_similarity_page-0001.jpg)
 
 The above figure shows the comparison between 2 input movie names on basis of genre, languages and director.
 
 #### 3.Knowledge graph of 1000 movies. 
 
-![](img/utk10.PNG)
+![](src/img/my_graph_page-0001.jpg)
 
 The blue nodes near the edges of the graph represent genres, edges of same color represent same genre movies.   
 
@@ -141,13 +141,6 @@ a. There is homogeneity between the movies belonging to the same color. (Represe
 
 b. There is heterogeneity among  movies from different clusters. (Represented by different colors.)
 
-Zoomed pic of a cluster.
-
-  ![](img/utk4.PNG)
-
-​     Here you can see the movies which belong to different colors. Each color represents a color.   
-
-Such a graph provides us insight about what movie an user can like based on few of his judgments. 
 
 ### C. Movie Recommendation System
 
@@ -159,14 +152,9 @@ It is based on an empirically derived ranking system which takes into account al
 
 director, writer, year, other user reviews, etc. 
 
-**Example** : For movie - The Avengers
+**Example** : For movie - Captain America - Civil War
 
-![](img/utk6.PNG)
-
-**Example :** For movie mission impossible
-
- ![](img/utk5.PNG)
-
+![](![alt text](image.png))
 
 
 
