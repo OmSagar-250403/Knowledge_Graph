@@ -74,10 +74,10 @@ The sentences were tokenized and the Entity-Relation-Entity were identified and 
 The knowledge graph was visualized using Networkx   
 
 <b><u>Output</u></b>:Below is the knowledge graph representing top 250 actors along with their extracted entities (subject-object pairs) and the predicates (relation between entities).      
-![](img/KGA1.png)   
+![](![alt text](image.png))   
 The networkx library was used to create a network from this data frame. The nodes will represent the entities and the edges or connections between the nodes will represent the relations between the nodes.   
 It is going to be a directed graph. In other words, the relation between any connected node pair is not two-way, it is only from one node to another. For example, “John eats pasta”
-![](img/KGA2.png)
+![](![alt text](image-2.png))
 The above figure represents a sub-knowledge graph based on the relation "starred in" for actors. 
 
 
@@ -90,9 +90,9 @@ Therefore I created a ranked retrieval based on tf-idf ranking
 
 <b><u>Output</u></b>
 
-1. Below is the output showing for the query "Angelina Jolie"
-![](img/out1.png)
-![](img/out2.png)
+1. Below is the output showing for the query "The Avengers"
+![](c:\Users\omsag\OneDrive\Pictures\Screenshots 1\Screenshot (10).png)
+![](c:\Users\omsag\OneDrive\Pictures\Screenshots 1\Screenshot (11).png)
 
 
 
@@ -100,8 +100,6 @@ Therefore I created a ranked retrieval based on tf-idf ranking
  
 Instead of scraping, the dataset of over 83,000 IMDb movies was directly downloaded and stored in final_dataset.csv. 
 Title, Date, Run Time, Genre, Rating Score, Description, Director, Stars, VotesGross   
-    
-![](img/out3.PNG)
 
 
 
@@ -116,13 +114,16 @@ The above code file defines 3 different types of knowledge graph structures rela
 
 #### 1. Movie detail graph for a single movie  
 
-![](img/utk1.png) 
+![](movie_detail_page-0001.jpg) 
 
 The above figure shows the detailed view of a given movie name showing all its details like director, cast, release date, etc.
 
 #### 2. Movie Comparison graph between two movies.   
 
-![](img/utk2.png)
+1st movie : Captain america: Civil war
+2nd movie : Iron Man
+
+![](![alt text](image-1.png))
 
 The above figure shows the comparison between 2 input movie names on basis of genre, languages and director.
 
