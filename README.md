@@ -135,7 +135,7 @@ The above figure shows the comparison between 2 input movie names on basis of ge
 
 #### 3.Knowledge graph of 1000 movies. 
 
-![](src/img/my_graph_page-0001.jpg)
+![](src/img/my_graph_zoomed-1.png)
 
 The blue nodes near the edges of the graph represent genres, edges of same color represent same genre movies.   
 

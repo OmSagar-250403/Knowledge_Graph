@@ -18,26 +18,26 @@ class KnowledgeGraph():
         color_map = []
         movies_genres = {}
 
-        with open('assets/final_dataset_imdb.csv',encoding="utf8") as csv_file:
+        with open('assets/final_dataset_imdb.csv', encoding="utf8") as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             line_count = 0
             for row in csv_reader:
                 if line_count == 0:  # Do not include the header from the data
                     line_count = 1
                     continue
-                if row[3]!= year and row[8]!= language:
+                if row[3] != year and row[8] != language:
                     continue
                 G.add_node(row[1])
                 title = row[1]
                 genres = list(row[5].split(", "))
-                movies_genres[title]=genres
+                movies_genres[title] = genres
                 for x in genres:
                     if x not in G:
                         G.add_node(x)
                         genres_read.append(x)
-                        genres_color[x]=genres_colors[len(genres_color)]
+                        genres_color[x] = genres_colors[len(genres_color)]
                     G.add_edge(title, x)
-                
+
                 if line_count == 1000:
                     break
                 line_count += 1
@@ -48,15 +48,30 @@ class KnowledgeGraph():
                 color_map.append('blue')
             else: 
                 hex_ = [genres_color[x] for x in movies_genres[str(node)]]
-                avg = sum(list(map(lambda x: int(x[1:], 16), hex_)))//len(hex_)
+                avg = sum(list(map(lambda x: int(x[1:], 16), hex_))) // len(hex_)
                 avg_color = f'#{avg:06x}'
                 color_map.append(avg_color)
 
         plt.figure(figsize=(15, 15))  # Adjust the figure size to something more reasonable
         pos = nx.spring_layout(G, k=0.10, iterations=20)
         nx.draw(G, with_labels=True, node_color=color_map, edge_color=edge_colors, node_size=4500, font_size=16, pos=pos)
-        plt.savefig("my_graph.pdf")
-        print("\nPlease check my_graph.pdf in the current code directory\n")
+
+        # Determine the limits for zooming in 10x
+        x_values = [pos[node][0] for node in G.nodes()]
+        y_values = [pos[node][1] for node in G.nodes()]
+        
+        # Calculate the center of the graph
+        x_center = sum(x_values) / len(x_values)
+        y_center = sum(y_values) / len(y_values)
+
+        # Set limits for 10x zoom
+        zoom_factor = 10
+        plt.xlim(x_center - (1/zoom_factor), x_center + (1/zoom_factor))
+        plt.ylim(y_center - (1/zoom_factor), y_center + (1/zoom_factor))
+        plt.axis('off')  # Hide axes for a cleaner look
+
+        plt.savefig("my_graph_zoomed.pdf", bbox_inches='tight')  # Save the zoomed-in graph
+        print("\nPlease check my_graph_zoomed.pdf in the current code directory\n")
     
     def movie_details(self, title):
         """
