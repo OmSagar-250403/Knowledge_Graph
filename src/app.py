@@ -21,7 +21,7 @@ def main():
     # Select the desired functionality
     option = st.selectbox(
         "Select an option:",
-        ["Movie Similarity", "Movie Details", "Movie Recommendations"]
+        ["Movie Similarity", "Knowledge Graph of Movies", "Movie Details", "Movie Recommendations"]
     )
 
     if option == "Movie Similarity":
@@ -53,6 +53,33 @@ def main():
 
             except Exception as e:
                 st.error(f"Error: {e}")
+
+
+
+    elif option == "Knowledge Graph of Movies":
+        st.subheader("Generate Knowledge Graph of Movies")
+        language = st.text_input("Enter Language (e.g., 'Hindi'):", value="Hindi")
+        year = st.text_input("Enter Year (e.g., '2020'):", value="2020")
+
+        if st.button("Generate Graph"):
+            try:
+                KG = KnowledgeGraph()  # Create an instance of KnowledgeGraph
+                KG.similar_movies(language, year)
+                st.success("Knowledge graph for movies generated. Check the PDF.")
+
+                # Display the PDF
+                with open("my_graph_zoomed.pdf", "rb") as pdf_file:
+                    PDFbyte = pdf_file.read()
+                st.download_button(
+                    label="Download Knowledge Graph",
+                    data=PDFbyte,
+                    file_name="my_graph_zoomed.pdf",
+                    mime='application/pdf'
+                )
+
+            except Exception as e:
+                st.error(f"Error: {e}")
+
 
     elif option == "Movie Details":
         st.subheader("Get Movie Details")
