@@ -54,7 +54,7 @@ class KnowledgeGraph():
 
         plt.figure(figsize=(15, 15))  # Adjust the figure size to something more reasonable
         pos = nx.spring_layout(G, k=0.10, iterations=20)
-        nx.draw(G, with_labels=True, node_color=color_map, edge_color=edge_colors, node_size=4500, font_size=16, pos=pos)
+        nx.draw_networkx(G, with_labels=True, node_color=color_map, edge_color=edge_colors, node_size=4500, font_size=16, pos=pos)
 
         # Determine the limits for zooming in 10x
         x_values = [pos[node][0] for node in G.nodes()]
@@ -161,7 +161,7 @@ class KnowledgeGraph():
             print("Falling back to spring_layout")
             pos = nx.spring_layout(G)
 
-        nx.draw(G, with_labels=True, node_color=color_map, node_size=node_sizes, pos=pos)
+        nx.draw_networkx(G, with_labels=True, node_color=color_map, node_size=node_sizes, pos=pos)
         
         edge_labels = nx.get_edge_attributes(G, 'movie')
         nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=20)
@@ -293,7 +293,7 @@ class KnowledgeGraph():
         pos = nx.planar_layout(G)
         pos[a] = np.array([1, 0])
         pos[b] = np.array([-1, 0])
-        nx.draw(G, with_labels=True, node_color=color_map, node_size=node_sizes, edge_cmap=plt.cm.Blues, font_size=16, pos=pos)
+        nx.draw_networkx(G, with_labels=True, node_color=color_map, node_size=node_sizes, edge_cmap=plt.cm.Blues, font_size=16, pos=pos)
         
         plt.savefig("movie_similarity.pdf")
         print("\nPlease Check movie_similarity.pdf in the current code directory\n")
