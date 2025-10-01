@@ -2,4 +2,10 @@
 
 /venv
 
-/actors and movies
+/src/kg_storage
+
+/src/output_images
+
+/src/scraped_data
+
+/src/logs.log
